@@ -1,0 +1,11 @@
+{
+  "name": "duckdb-node-js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "dependencies": {
+    "@duckdb/node-api": "^1.1.3-alpha.6"
+  },
+  "packageManager": "yarn@4.5.1"
+}
