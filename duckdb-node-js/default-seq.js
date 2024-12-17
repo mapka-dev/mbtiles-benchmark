@@ -1,13 +1,19 @@
 import { DuckDBInstance } from '@duckdb/node-api';
 
+// Install SQLite extension
+const install = await DuckDBInstance.create();
+const installConnection = await install.connect();
+await installConnection.run("INSTALL sqlite;");
 
-const db = await DuckDBInstance.create("../data/10m_urban_areas.mbtiles");
-const connection = db.connect();
+// Open database and create connection
+const path = "../data/10m_urban_areas.mbtiles"
+const db = await DuckDBInstance.create(path, {
+  threads: 4,
+});
+const connection = await db.connect();
 
-const getSqlQuery = "SELECT tile_data FROM tiles WHERE zoom_level = ? AND tile_column = ? AND tile_row = ?";
-
+// Create queries parameters
 const queries = [];
-
 for (let z = 0; z < 12; z++) {
   const maxDim  = 2**z
 
@@ -16,14 +22,18 @@ for (let z = 0; z < 12; z++) {
       queries.push([z, x, y]);
     }
   }
-}
-const prepared = connection.prepare(getSqlQuery);
+}  
+
+const prepared = await connection.prepare(
+  "SELECT tile_data FROM tiles WHERE zoom_level = $1 AND tile_column = $2 AND tile_row = $3"
+);
 
 const start = Date.now();
 for (const query of queries) {
-  prepared.bindInteger(2, query[0]);
-  prepared.bindInteger(3, query[1]);
-  prepared.bindInteger(4, query[2]);
+  console.log(query);
+  prepared.bindInteger(1, query[0]);
+  prepared.bindInteger(2, query[1]);
+  prepared.bindInteger(3, query[2]);
   await prepared.run();
 }
 const end = Date.now();
