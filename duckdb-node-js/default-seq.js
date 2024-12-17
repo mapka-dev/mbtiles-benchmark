@@ -30,11 +30,13 @@ const prepared = await connection.prepare(
 
 const start = Date.now();
 for (const query of queries) {
-  console.log(query);
+  console.time(query);
   prepared.bindInteger(1, query[0]);
   prepared.bindInteger(2, query[1]);
   prepared.bindInteger(3, query[2]);
+
   await prepared.run();
+  console.timeEnd(query);
 }
 const end = Date.now();
 
