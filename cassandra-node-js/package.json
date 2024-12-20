@@ -1,0 +1,15 @@
+{
+  "name": "cassandra-node-js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "dependencies": {
+    "cassandra-driver": "^4.7.2",
+    "moderndash": "^4.0.0"
+  },
+  "scripts": {
+    "load": "node --experimental-sqlite ./loadData.js"
+  },
+  "packageManager": "yarn@4.5.2"
+}
