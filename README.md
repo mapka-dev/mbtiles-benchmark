@@ -29,6 +29,12 @@ Sequential queries are not fully useful as in real life I need to build worker t
   Default config:
   Time taken: 238.997ms per query.
 
+- Cassandra Node.js
+
+  Default config:
+  Time taken: 1043329ms to execute 5592405 queries
+  Average Query Time:  0.18656177440653887
+
 ## Issues
 
 - DuckDB: slow and manual install of SQLite extension: <https://github.com/duckdb/duckdb-node-neo/issues/62>

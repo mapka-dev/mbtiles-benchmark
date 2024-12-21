@@ -4,7 +4,7 @@ const client = createClient({
   url: 'http://localhost:8123',
 });
 
-const getSqlQuery = "SELECT tile_data FROM tiles WHERE zoom_level = {zoom_level:UInt64} AND tile_column = {tile_column:UInt64} AND tile_row = {tile_row:UInt64}";
+const getSqlQuery = "SELECT tile_data FROM tiles WHERE zoom_level = {zoom_level:UInt32} AND tile_column = {tile_column:UInt32} AND tile_row = {tile_row:UInt32}";
 
 const queries = [];
 
@@ -19,13 +19,13 @@ for (let z = 0; z < 12; z++) {
 }
 
 const start = Date.now();
-for (const query of queries) {
+for (const [zoom_level, tile_column, tile_row] of queries.slice(0, 100)) {
   const result = await client.query({
     query: getSqlQuery,
     query_params: {
-      zoom_level: query[0],
-      tile_column: query[1],
-      tile_row: query[2],
+      zoom_level,
+      tile_column,
+      tile_row,
     },
     format: 'JSONEachRow',
   });
@@ -33,7 +33,7 @@ for (const query of queries) {
 
 const end = Date.now();
 
-console.log(`Time taken: ${end - start}ms to execute ${queries.length} queries`);
-console.log("Average Query Time: ", (end - start) / queries.length);
+console.log(`Time taken: ${end - start}ms to execute ${queries.slice(0, 100).length} queries`);
+console.log("Average Query Time: ", (end - start) / queries.slice(0, 100).length);
 
 await client.close();
