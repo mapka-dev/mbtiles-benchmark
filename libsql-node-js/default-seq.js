@@ -1,6 +1,6 @@
 import Database from 'libsql';
 
-const db = new Database("../data/10m_urban_areas.mbtiles", {
+const db = new Database("../.data/10m_urban_areas.mbtiles", {
   open: true,
 });
 const getSqlQuery = "SELECT tile_data FROM tiles WHERE zoom_level = ? AND tile_column = ? AND tile_row = ?";

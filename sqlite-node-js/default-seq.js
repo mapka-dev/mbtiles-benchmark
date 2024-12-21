@@ -1,7 +1,7 @@
 import { DatabaseSync } from "node:sqlite";
 
 
-const db = new DatabaseSync("../data/10m_urban_areas.mbtiles", {open: true});
+const db = new DatabaseSync("../.data/10m_urban_areas.mbtiles", {open: true});
 const getSqlQuery = "SELECT tile_data FROM tiles WHERE zoom_level = ? AND tile_column = ? AND tile_row = ?";
 
 const queries = [];
