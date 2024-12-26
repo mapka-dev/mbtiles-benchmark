@@ -1,6 +1,6 @@
 import Database from 'libsql';
 
-const db = new Database("../data/10m_urban_areas.mbtiles", {
+const db = new Database("../.data/10m_urban_areas.mbtiles", {
   readOnly: true,
   open: true,
 });

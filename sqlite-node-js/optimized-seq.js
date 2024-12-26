@@ -1,7 +1,7 @@
 import { DatabaseSync } from "node:sqlite";
 
 
-const db = new DatabaseSync("../data/10m_urban_areas.mbtiles", {
+const db = new DatabaseSync("../.data/10m_urban_areas.mbtiles", {
   readOnly: true,
   open: true,
 });

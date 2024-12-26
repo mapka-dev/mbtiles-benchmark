@@ -1,0 +1,11 @@
+{
+  "name": "clickhouse-node-js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "dependencies": {
+    "@clickhouse/client": "^1.10.0"
+  },
+  "packageManager": "yarn@4.5.2"
+}

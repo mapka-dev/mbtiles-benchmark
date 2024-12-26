@@ -37,5 +37,3 @@ const end = Date.now();
 
 console.log(`Time taken: ${end - start}ms to execute ${queries.length} queries`);
 console.log("Average Query Time: ", (end - start) / queries.length);
-
-await client.close()
